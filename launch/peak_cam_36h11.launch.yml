@@ -1,7 +1,4 @@
 launch:
-- arg:
-    name: device
-    default: "0"
 
 - node_container:
     pkg: rclcpp_components
@@ -9,13 +6,16 @@ launch:
     name: apriltag_container
     namespace: ""
     composable_node:
-    - pkg: v4l2_camera
-      plugin: v4l2_camera::V4L2Camera
+    - pkg: peak_cam
+      # plugin: peak_cam::Peak_cam
       name: camera
-      namespace: v4l2
+      namespace: cam1
       param:
       - name: video_device
-        value: /dev/video$(var device)
+        value:
+            - /dev/bus/usb/002/003:/dev/bus/usb/002/003
+            - /dev/bus/usb/002/117:/dev/bus/usb/002/117
+            - /dev/bus/usb/002/118:/dev/bus/usb/002/118
       extra_arg:
       - name: use_intra_process_comms
         value: "True"
@@ -23,7 +23,7 @@ launch:
     - pkg: image_proc
       plugin: image_proc::RectifyNode
       name: rectify
-      namespace: v4l2
+      namespace: peak_cam
       remap:
       - from: image
         to: image_raw
@@ -37,9 +37,9 @@ launch:
       namespace: apriltag
       remap:
       - from: /apriltag/image_rect
-        to: /v4l2/image_rect
+        to: /peak_cam/image_raw
       - from: /apriltag/camera_info
-        to: /v4l2/camera_info
+        to: /peak_cam/camera_info
       param:
       - from: $(find-pkg-share apriltag_ros)/cfg/tags_36h11.yaml
       extra_arg:
