@@ -41,7 +41,7 @@ launch:
       - from: /apriltag/camera_info
         to: /peak_cam/camera_info
       param:
-      - from: $(find-pkg-share apriltag_ros)/cfg/tags_36h11.yaml
+      - from: cali_ws/src/apriltag_ros2/cfg/tags_36h11.yaml
       extra_arg:
       - name: use_intra_process_comms
         value: "True"
