@@ -18,4 +18,4 @@ apriltag_detection:
         tag:
             ids: [0, 1, 2, 3, 4, 5, 6, 7]            # tag ID
             frames: [base, object]  # optional frame name
-            sizes: [0.1, 0.1]   # optional tag-specific edge size
+            sizes: [1.0, 1.0]   # optional tag-specific edge size
