@@ -17,5 +17,5 @@ apriltag:
         # optional list of tags
         tag:
             ids: [1, 3, 4]            # tag ID
-            frames: [tagID_1, tagID_3, tagID_4]  # optional frame name
+            frames: [tagID_2, tagID_3, tagID_5]  # optional frame name
             sizes: [0.10, 0.10, 0.10]   # optional tag-specific edge size
