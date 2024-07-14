@@ -10,7 +10,7 @@ def generate_launch_description():
     parameters = Path('/cali_ws/src/apriltag_ros2/cfg/tags_36h11.yaml')
 
     with open(parameters, 'r') as f:
-        params = yaml.safe_load(f)['/**']['ros__parameters']
+        params = yaml.safe_load(f)['apriltag']['ros__parameters']
     print(params)
         
         
