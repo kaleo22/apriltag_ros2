@@ -34,4 +34,4 @@ def generate_launch_description():
     
     
     
-    return LaunchDescription(apriltagNodeContainer)
+    return LaunchDescription([apriltagNodeContainer])
