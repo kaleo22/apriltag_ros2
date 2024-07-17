@@ -4,8 +4,7 @@ apriltag:
         family: 36h11           # tag family name
         size: 0.20             # tag edge size in meter
         max_hamming: 0          # maximum allowed hamming distance (corrected bits)
-        image_rect: /peak_cam/image_raw
-        camera_info: peak_cam/camera_info
+        
 
         # see "apriltag.h" 'struct apriltag_detector' for more documentation on these optional parameters
         detector:

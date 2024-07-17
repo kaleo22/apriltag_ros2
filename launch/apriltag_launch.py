@@ -15,18 +15,22 @@ def generate_launch_description():
         
         
     apriltagNodeContainer = ComposableNodeContainer(
-        name = 'apriltagNode',
-        namespace = '',
-        package = 'apriltag_ros',
-        executable = 'apriltag_node',
+        name='apriltagNode',
+        namespace='',
+        package='rclcpp_components',
+        executable='component_container',
         composable_node_descriptions=[
             ComposableNode(
                 package='apriltag_ros',
-                plugin='',
+                plugin='apriltag_ros::AprilTagNode',
                 name='apriltag',
-                parameters=[params])
+                parameters=[params],
+                remappings=[
+                    ('image_rect', '/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
+                    ('camera_info', '/peak_cam/camera_info')  # Remap camera_info to /peak_cam/camera_info
+                ])
         ],
-        output = 'screen'
+        output='screen'
     )
     
     
