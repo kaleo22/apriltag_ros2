@@ -22,7 +22,7 @@ def generate_launch_description():
         composable_node_descriptions=[
             ComposableNode(
                 package='apriltag_ros',
-                plugin='',
+                plugin='AprilTagNode',
                 name='apriltag',
                 parameters=[params],
                 remappings=[
