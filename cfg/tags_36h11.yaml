@@ -21,4 +21,4 @@ apriltag:
             frames: [tagID_0, tagID_1, tagID_2]  # optional frame name
             sizes: [0.10, 0.10, 0.10]   # optional tag-specific edge size
 
-        camera_number: 4
+        camera_number: 3
