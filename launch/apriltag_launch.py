@@ -19,7 +19,7 @@ def generate_launch_description():
     for i in range(1, camnum):
         container_name = f'apriltagNodeContainer{i}'
         node_name = f'apriltag{i}'
-        if i is 1:
+        if i == 1:
                     mapping=[
                         (f'image_rect', '/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
                         (f'camera_info', '/peak_cam/camera_info')]  # Remap camera_info to /peak_cam/camera_info
