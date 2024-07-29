@@ -12,10 +12,23 @@ def generate_launch_description():
     with open(parameters, 'r') as f:
         params = yaml.safe_load(f)['apriltag']['ros__parameters']
     print(params)
+
+    camnum = params.get('camera_number', [])
+    containers = []
         
-        
-    apriltagNodeContainer = ComposableNodeContainer(
-        name='apriltagNode',
+    for i in enumerate(camnum, start=1):
+        container_name = f'apriltagNodeContainer{i}'
+        node_name = f'apriltag{i}'
+        if i is 1:
+                    mapping=[
+                        ('image_rect', '/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
+                        ('camera_info', '/peak_cam/camera_info')]  # Remap camera_info to /peak_cam/camera_info
+        else:
+                    mapping=[
+                        ('image_rect', '/peak_cam_{i}/image_raw_{i}'),  # Remap image_rect to peak_cam/image_raw
+                        ('camera_info', '/peak_cam_{i}/camera_info')]  # Remap camera_info to /peak_cam/camera_info
+        container = ComposableNodeContainer(
+        name=container_name,
         namespace='',
         package='rclcpp_components',
         executable='component_container',
@@ -23,19 +36,19 @@ def generate_launch_description():
             ComposableNode(
                 package='apriltag_ros',
                 plugin='AprilTagNode',
-                name='apriltag',
+                name=node_name,
                 parameters=[params],
-                remappings=[
-                    ('image_rect', '/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
-                    ('camera_info', '/peak_cam/camera_info')  # Remap camera_info to /peak_cam/camera_info
-                ])
+                remappings=mapping
+                )
         ],
         output='screen'
-    )
+        
+        )
+        containers.append(container)   
     
     
     
     
     
     
-    return LaunchDescription([apriltagNodeContainer])
+    return LaunchDescription(containers)
