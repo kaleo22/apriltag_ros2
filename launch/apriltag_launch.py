@@ -13,20 +13,20 @@ def generate_launch_description():
         params = yaml.safe_load(f)['apriltag']['ros__parameters']
     print(params)
 
-    camnum = params.get('camera_number', [])
+    camnum = params.get('camera_number', int)
     containers = []
         
-    for i in enumerate(camnum, start=1):
+    for i in range(1, camnum):
         container_name = f'apriltagNodeContainer{i}'
         node_name = f'apriltag{i}'
         if i is 1:
                     mapping=[
-                        ('image_rect', '/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
-                        ('camera_info', '/peak_cam/camera_info')]  # Remap camera_info to /peak_cam/camera_info
+                        (f'image_rect', '/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
+                        (f'camera_info', '/peak_cam/camera_info')]  # Remap camera_info to /peak_cam/camera_info
         else:
                     mapping=[
-                        ('image_rect', '/peak_cam_{i}/image_raw_{i}'),  # Remap image_rect to peak_cam/image_raw
-                        ('camera_info', '/peak_cam_{i}/camera_info')]  # Remap camera_info to /peak_cam/camera_info
+                        (f'image_rect', '/peak_cam_{i}/image_raw_{i}'),  # Remap image_rect to peak_cam/image_raw
+                        (f'camera_info', '/peak_cam_{i}/camera_info')]  # Remap camera_info to /peak_cam/camera_info
         container = ComposableNodeContainer(
         name=container_name,
         namespace='',
