@@ -16,7 +16,7 @@ def generate_launch_description():
     camnum = params.get('camera_number', int)
     containers = []
         
-    for i in range(1, camnum):
+    for i in range(1, camnum + 1):
         container_name = f'apriltagNodeContainer{i}'
         node_name = f'apriltag{i}'
         if i == 1:
