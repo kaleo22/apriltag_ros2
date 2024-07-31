@@ -22,13 +22,15 @@ def generate_launch_description():
         if i == 1:
             mapping=[
                 ('image_rect', f'/peak_cam/image_raw'),  # Remap image_rect to peak_cam/image_raw
-                ('camera_info', f'/peak_cam/camera_info')
-            ]  # Remap camera_info to /peak_cam/camera_info
+                ('camera_info', f'/peak_cam/camera_info'), # Remap camera_info to /peak_cam/camera_info
+                ("/tf", f"/tf_{i}")
+            ]  
         else:
             mapping=[
                 ('image_rect', f'/peak_cam_{i}/image_raw_{i}'),  # Remap image_rect to peak_cam/image_raw
-                ('camera_info', f'/peak_cam_{i}/camera_info')
-            ]  # Remap camera_info to /peak_cam/camera_info
+                ('camera_info', f'/peak_cam_{i}/camera_info'), # Remap camera_info to /peak_cam/camera_info
+                ("/tf", f"/tf_{i}")
+            ]  
         
         container = ComposableNodeContainer(
         name=container_name,
